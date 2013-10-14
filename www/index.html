@@ -29,12 +29,19 @@
         <div>
             <h1>JS Tests</h1>
             <p><button onclick="storeThings()">Store Things</button></p>
-            <p><button onclick="getThing()">Get thing</button></p>
+            <p><button onclick="getThing('marsbar')">Get Mars</button></p>
+            <p><button onclick="getThing('twix')">Get Twix</button></p>
             <p><button onclick="clearThings()">Clear things</button></p>
             <p><button onclick="countThings()">Count things</button></p>
             <p id="placeholder"></p>
             <p id="string"></p>
-            <p id="parsed"></p>
+            <p>Product Name: <span id="prodname"/></span></p>
+            <p>Calories: <span id="calories"/></span></p>
+            <p>Protein: <span id="protein"/></span></p>
+            <p>Carbs: <span id="carbs"/></span></p>
+            <p>Fat: <span id="fat"/></span></p>
+            <p>Fibre: <span id="fibre"/></span></p>
+            <p>Sodium: <span id="sodium"/></span></p>
         </div>
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -50,19 +57,31 @@
             this.fibre = fibre;
             this.sodium = sodium;
         }
+        function printChocolateBar(ChocolateBar){
+            document.getElementById('prodname').innerHTML=ChocolateBar.prodname;
+            document.getElementById('calories').innerHTML=ChocolateBar.calories;
+            document.getElementById('protein').innerHTML=ChocolateBar.protein;
+            document.getElementById('carbs').innerHTML=ChocolateBar.carbs;
+            document.getElementById('fat').innerHTML=ChocolateBar.fat;
+            document.getElementById('fibre').innerHTML=ChocolateBar.fibre;
+            document.getElementById('sodium').innerHTML=ChocolateBar.sodium;
+
+        }
 
         function storeThings()
         {
             var marsbar = new ChocolateBar("Mars Bar","449","4.3","68.9","17.1","1.2","0.16");
             window.localStorage.setItem("marsbar",JSON.stringify(marsbar));
+            var twix = new ChocolateBar("Twix","495","4.5","64.6","24","1.5","0.17");
+            window.localStorage.setItem("twix",JSON.stringify(twix));
         }
 
-        function getThing()
+        function getThing(key)
         {
-            string = window.localStorage.getItem("marsbar");
+            string = window.localStorage.getItem(key);
             document.getElementById('string').innerHTML=string;
-            parsed = JSON.parse(window.localStorage.getItem("marsbar"));
-            document.getElementById('parsed').innerHTML=parsed.prodname;
+            parsed = JSON.parse(window.localStorage.getItem(key));
+            printChocolateBar(parsed);
         }
 
         function clearThings()
