@@ -28,6 +28,7 @@
     <body>
         <div>
             <h1>JS Tests</h1>
+            <p><button onclick="setUp()">Set Up</button></p>
             <p><button onclick="storeThings()">Store Things</button></p>
             <p><button onclick="getThing('marsbar')">Get Mars</button></p>
             <p><button onclick="getThing('twix')">Get Twix</button></p>
@@ -57,7 +58,9 @@
             this.fibre = fibre;
             this.sodium = sodium;
         }
-        function printChocolateBar(ChocolateBar){
+
+        function printChocolateBar(ChocolateBar)
+        {
             document.getElementById('prodname').innerHTML=ChocolateBar.prodname;
             document.getElementById('calories').innerHTML=ChocolateBar.calories;
             document.getElementById('protein').innerHTML=ChocolateBar.protein;
@@ -65,15 +68,25 @@
             document.getElementById('fat').innerHTML=ChocolateBar.fat;
             document.getElementById('fibre').innerHTML=ChocolateBar.fibre;
             document.getElementById('sodium').innerHTML=ChocolateBar.sodium;
-
+        }
+        function setUp()
+        {
+            function doTransaction(tx)
+            {
+                var query = "CREATE TABLE IF NOT EXISTS nutrition(prodname TEXT, calories TEXT, protein TEXT, carbs TEXT, fat TEXT, fibre TEXT, sodium TEXT)";
+                tx.executeSql(query);
+            }
+            function onError(error)
+            {
+                console.log(error.message);
+            }
+            var db = window.openDatabase('foods_db','1.0','Foods Databasee',2048);
+            db.transaction(doTransaction,onError);
         }
 
         function storeThings()
         {
-            var marsbar = new ChocolateBar("Mars Bar","449","4.3","68.9","17.1","1.2","0.16");
-            window.localStorage.setItem("marsbar",JSON.stringify(marsbar));
-            var twix = new ChocolateBar("Twix","495","4.5","64.6","24","1.5","0.17");
-            window.localStorage.setItem("twix",JSON.stringify(twix));
+
         }
 
         function getThing(key)
