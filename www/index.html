@@ -33,22 +33,32 @@
             <p><button onclick="clearThings()">Clear things</button></p>
             <p><button onclick="countThings()">Count things</button></p>
             <p id="placeholder"></p>
+            <p id="string"></p>
+            <p id="parsed"></p>
         </div>
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
+        function ChocolateBar(name,calories,protein,carbs,fat,fibre,sodium){
+            this.name = name;
+            this.calories = calories;
+            this.protein = protein;
+            this.carbs = carbs;
+            this.fat = fat;
+            this.fibre = fibre;
+            this.sodium = sodium;
+        }
         function storeThings()
         {
-            window.localStorage.setItem("1","First thing");
-            window.localStorage.setItem("2","Second thing");
-            window.localStorage.setItem("3","Third thing");
-            window.localStorage.setItem("4","Fourth thing");
-            window.localStorage.setItem("5","Fifth thing");
+            var marsbar = new ChocolateBar("marsbar","449","4.3","68.9","17.1","1.2","0.16");
+            window.localStorage.setItem("marsbar",JSON.stringify(marsbar));
         }
         function getThing(key)
         {
-            console.log(value=window.localStorage.getItem(key));
-            document.getElementById('placeholder').innerHTML=value;
+            string=window.localStorage.getItem(“marsbar”);
+            document.getElementById('string').innerHTML=marsbar;
+            parsed=JSON.parse(string);
+            document.getElementById('parsed').innerHTML=parsed;
         }
         function clearThings()
         {
