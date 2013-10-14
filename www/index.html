@@ -26,18 +26,39 @@
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+        <div>
+            <h1>JS Tests</h1>
+            <p><button onclick="storeThings()">Store Things</button></p>
+            <p><button onclick="getThing(5)">Get thing</button></p>
+            <p><button onclick="clearThings()">Clear things</button></p>
+            <p><button onclick="countThings()">Count things</button></p>
+            <p id="placeholder"></p>
         </div>
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-            console.log("App started");
-            app.initialize();
+        function storeThings()
+        {
+            window.localStorage.setItem("1","First thing");
+            window.localStorage.setItem("2","Second thing");
+            window.localStorage.setItem("3","Third thing");
+            window.localStorage.setItem("4","Fourth thing");
+            window.localStorage.setItem("5","Fifth thing");
+        }
+        function getThing(key)
+        {
+            console.log(value=window.localStorage.getItem(key));
+            document.getElementById('placeholder').innerHTML=value;
+        }
+        function clearThings()
+        {
+            window.localStorage.clear();
+        }
+        function countThings()
+        {
+            length=window.localStorage.length;
+            document.getElementById('placeholder').innerHTML=length;
+        }
         </script>
     </body>
 </html>
