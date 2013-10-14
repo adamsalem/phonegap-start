@@ -29,7 +29,7 @@
         <div>
             <h1>JS Tests</h1>
             <p><button onclick="storeThings()">Store Things</button></p>
-            <p><button onclick="getThing(5)">Get thing</button></p>
+            <p><button onclick="getThing()">Get thing</button></p>
             <p><button onclick="clearThings()">Clear things</button></p>
             <p><button onclick="countThings()">Count things</button></p>
             <p id="placeholder"></p>
@@ -39,8 +39,10 @@
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
-        function ChocolateBar(name,calories,protein,carbs,fat,fibre,sodium){
-            this.name = name;
+
+        function ChocolateBar(prodname,calories,protein,carbs,fat,fibre,sodium)
+        {
+            this.prodname = prodname;
             this.calories = calories;
             this.protein = protein;
             this.carbs = carbs;
@@ -48,22 +50,26 @@
             this.fibre = fibre;
             this.sodium = sodium;
         }
+
         function storeThings()
         {
-            var marsbar = new ChocolateBar("marsbar","449","4.3","68.9","17.1","1.2","0.16");
+            var marsbar = new ChocolateBar("Mars Bar","449","4.3","68.9","17.1","1.2","0.16");
             window.localStorage.setItem("marsbar",JSON.stringify(marsbar));
         }
-        function getThing(key)
+
+        function getThing()
         {
-            string=window.localStorage.getItem(“marsbar”);
-            document.getElementById('string').innerHTML=marsbar;
-            parsed=JSON.parse(string);
-            document.getElementById('parsed').innerHTML=parsed;
+            string = window.localStorage.getItem("marsbar");
+            document.getElementById('string').innerHTML=string;
+            parsed = JSON.parse(window.localStorage.getItem("marsbar"));
+            document.getElementById('parsed').innerHTML=parsed.prodname;
         }
+
         function clearThings()
         {
             window.localStorage.clear();
         }
+
         function countThings()
         {
             length=window.localStorage.length;
